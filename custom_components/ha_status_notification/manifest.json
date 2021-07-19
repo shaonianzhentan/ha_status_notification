@@ -1,0 +1,11 @@
+{
+    "domain": "ha_status_notification",
+    "name": "\u72B6\u6001\u63D0\u9192",
+    "version": "1.0.0",
+    "documentation": "https://github.com/shaonianzhentan/ha_status_notification",
+    "requirements": [],
+    "codeowners": [
+        "@shaonianzhentan"
+    ],
+    "iot_class": "assumed_state"
+}
