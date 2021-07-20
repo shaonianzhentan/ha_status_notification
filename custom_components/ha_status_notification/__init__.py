@@ -2,7 +2,8 @@ import os, uuid, logging, requests
 
 _LOGGER = logging.getLogger(__name__)
 
-from homeassistant.const import CONF_TOKEN, STATE_OFF, STATE_ON, STATE_UNAVAILABLE,  STATE_PLAYING, STATE_PAUSED, STATE_IDLE
+from homeassistant.const import CONF_TOKEN, STATE_OFF, STATE_ON, STATE_NOT_HOME, STATE_HOME, \
+    STATE_UNAVAILABLE,  STATE_PLAYING, STATE_PAUSED, STATE_IDLE
 
 DOMAIN = 'ha_status_notification'
 VERSION = '1.0'
@@ -40,6 +41,11 @@ def setup(hass, config):
                     if device_class == 'motion':
                         msg = f"【{friendly_name}】检测到有人"
 
+            # 脚本
+            elif new_state.domain == 'script':
+                if new_state.state == STATE_ON:
+                    msg = f"【{friendly_name}】已执行"
+
             # 媒体播放器
             elif new_state.domain == 'media_player':
                 if new_state.state == STATE_PLAYING:
@@ -56,7 +62,7 @@ def setup(hass, config):
 
             # 天气
             elif new_state.domain == 'weather':
-                msg = f"【{friendly_name}】当前温度：{attr.get('temperature')} 湿度：{attr.get('humidity')} 风速：{attr.get('wind_speed')}"
+                msg = f"【{friendly_name}】天气：{new_state.state} 当前温度：{attr.get('temperature')} 湿度：{attr.get('humidity')} 风速：{attr.get('wind_speed')}"
 
             # 发送通知
             if msg != '':
