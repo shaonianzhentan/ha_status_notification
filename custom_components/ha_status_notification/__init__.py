@@ -68,6 +68,10 @@ def setup(hass, config):
             elif new_state.domain == 'weather':
                 msg = f"【{friendly_name}】天气：{new_state.state} 当前温度：{attr.get('temperature')} 湿度：{attr.get('humidity')} 风速：{attr.get('wind_speed')}"
 
+            # 太阳
+            elif new_state.domain == 'sun':
+                msg = f"【{friendly_name}】{new_state.state}"
+
             # 发送通知
             if msg != '':
                 send_msg(msg)
