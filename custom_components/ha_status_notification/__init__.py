@@ -29,6 +29,10 @@ def setup(hass, config):
             msg = ''
             if new_state.state == STATE_ON:
                 msg = f"【{friendly_name}】开启"
+            elif new_state.state == STATE_NOT_HOME:
+                msg = f"【{friendly_name}】不在家"
+            elif new_state.state == STATE_HOME:
+                msg = f"【{friendly_name}】在家"
 
             # 不可用提示
             if new_state.state == STATE_UNAVAILABLE:
