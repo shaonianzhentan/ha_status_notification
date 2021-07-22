@@ -5,6 +5,8 @@ _LOGGER = logging.getLogger(__name__)
 from homeassistant.const import CONF_TOKEN, STATE_OFF, STATE_ON, STATE_NOT_HOME, STATE_HOME, \
     STATE_UNAVAILABLE,  STATE_PLAYING, STATE_PAUSED, STATE_IDLE
 
+from .translations import weather_state, sun_state
+
 DOMAIN = 'ha_status_notification'
 VERSION = '1.0'
 
@@ -66,11 +68,11 @@ def setup(hass, config):
 
             # 天气
             elif new_state.domain == 'weather':
-                msg = f"【{friendly_name}】天气：{new_state.state} 当前温度：{attr.get('temperature')} 湿度：{attr.get('humidity')} 风速：{attr.get('wind_speed')}"
+                msg = f"【{friendly_name}】天气：{weather_state[new_state.state]} 当前温度：{attr.get('temperature')} 湿度：{attr.get('humidity')} 风速：{attr.get('wind_speed')}"
 
             # 太阳
             elif new_state.domain == 'sun':
-                msg = f"【{friendly_name}】{new_state.state}"
+                msg = f"【{friendly_name}】{sun_state[new_state.state]}"
 
             # 发送通知
             if msg != '':
