@@ -8,7 +8,7 @@ from homeassistant.const import CONF_TOKEN, STATE_OFF, STATE_ON, STATE_NOT_HOME,
 from .translations import weather_state, sun_state
 
 DOMAIN = 'ha_status_notification'
-VERSION = '1.0'
+VERSION = '1.1'
 
 def setup(hass, config):
     cfg = config[DOMAIN]
@@ -79,6 +79,14 @@ def setup(hass, config):
                 send_msg(msg)
 
     hass.bus.listen("state_changed", handle_event)
+
+    # 通知
+    def notify_message(call):
+        data = call.data
+        if 'message' in data:
+            send_msg(data.get('message'))
+
+    hass.services.register(DOMAIN, 'notify', notify_message)
     # 显示插件信息
     _LOGGER.info('''
 -------------------------------------------------------------------

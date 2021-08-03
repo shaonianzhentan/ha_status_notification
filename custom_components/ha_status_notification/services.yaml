@@ -1,0 +1,11 @@
+notify:
+  name: 发送通知
+  description: 发送消息到微信
+  fields:
+    message:
+      name: 消息
+      description: 通知的消息内容
+      required: true
+      example: 我是要发送到微信的消息哦
+      selector:
+        text:
