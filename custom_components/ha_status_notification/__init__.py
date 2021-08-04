@@ -68,7 +68,7 @@ def setup(hass, config):
 
             # 天气
             elif new_state.domain == 'weather':
-                msg = f"【{friendly_name}】天气：{weather_state[new_state.state]} 当前温度：{attr.get('temperature')} 湿度：{attr.get('humidity')} 风速：{attr.get('wind_speed')}"
+                msg = f"【{friendly_name}】天气：{weather_state[new_state.state]}，当前温度：{attr.get('temperature')}，湿度：{attr.get('humidity')}，风速：{attr.get('wind_speed')}"
 
             # 太阳
             elif new_state.domain == 'sun':
