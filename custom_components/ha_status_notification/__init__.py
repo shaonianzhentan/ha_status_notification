@@ -25,7 +25,9 @@ def setup(hass, config):
         old_state = data.get('old_state')
         new_state = data.get('new_state')
         # 状态一致时，发送通知消息
-        if old_state is not None and ['binary_sensor.updater'].count(new_state.entity_id) == 0 and old_state.state != new_state.state:
+        if old_state is not None and new_state is not None \
+            and ['binary_sensor.updater'].count(new_state.entity_id) == 0 \
+            and old_state.state != new_state.state:
             attr = new_state.attributes
             friendly_name = attr['friendly_name']
             msg = ''
