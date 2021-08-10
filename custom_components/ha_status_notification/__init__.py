@@ -29,7 +29,10 @@ def setup(hass, config):
             and ['binary_sensor.updater'].count(new_state.entity_id) == 0 \
             and old_state.state != new_state.state:
             attr = new_state.attributes
-            friendly_name = attr['friendly_name']
+            # 判断名称为空
+            friendly_name = attr.get('friendly_name', '')
+            if friendly_name == '':
+                return
             msg = ''
             if new_state.state == STATE_ON:
                 msg = f"【{friendly_name}】开启"
